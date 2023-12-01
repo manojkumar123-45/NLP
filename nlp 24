@@ -1,0 +1,23 @@
+from pyparsing import Word, Literal, Keyword, infixNotation, opAssoc
+and_ = Keyword("and")
+or_ = Keyword("or")
+not_ = Keyword("not")
+variable = Word("xy", exact=1)
+expr = infixNotation(variable, [
+    (not_, 1, opAssoc.RIGHT),
+    (and_, 2, opAssoc.LEFT),
+    (or_, 2, opAssoc.LEFT),
+])
+
+expressions = [
+    "x and y",
+    "x or (not y)",
+    "x and (y or (not x))",
+]
+for i, expression in enumerate(expressions):
+    print(f"\nExpression {i + 1}: {expression}")
+    try:
+        result = expr.parseString(expression)[0]
+        print(f"Result: {result}")
+    except Exception as e:
+        print(f"Error: {e}")
