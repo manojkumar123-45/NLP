@@ -1,0 +1,9 @@
+import re
+def extract_words_with_pattern(text, pattern):
+    matches = re.findall(pattern, text)
+    return matches
+input_sentence = "The quick brown fox jumps over the lazy dog. The cat is also agile."
+pattern = r'\b\w{3}\b'
+result = extract_words_with_pattern(input_sentence, pattern)
+print("Input Sentence:", input_sentence)
+print("Three-letter words:", result)
